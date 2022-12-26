@@ -10,9 +10,9 @@ Create an OpenSearch domain in (AWS) which support IAM based AuthN/AuthZ.
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 export AWS_SESSION_TOKEN=
+export AWS_REGION=
 
 export OPENSEARCH_ENDPOINT=https://....us-west-2.es.amazonaws.com
-export OPENSEARCH_REGION=us-west-2
 
 bundle exec ruby example.rb
 ```
