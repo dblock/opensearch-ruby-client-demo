@@ -13,7 +13,7 @@ require 'opensearch-aws-sigv4'
 require 'aws-sigv4'
 
 signer = Aws::Sigv4::Signer.new(
-  service: 'es',
+  service: ENV['SERVICE'] || 'es',
   region: ENV['AWS_REGION'] || 'us-east-1',
   access_key_id: ENV['AWS_ACCESS_KEY_ID'] || raise('Missing AWS_ACCESS_KEY_ID.'),
   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] || raise('Missing AWS_SECRET_ACCESS_KEY.'),
@@ -21,12 +21,16 @@ signer = Aws::Sigv4::Signer.new(
 )
 
 client = OpenSearch::Aws::Sigv4Client.new({
-  host: ENV['OPENSEARCH_ENDPOINT'] || raise('Missing OPENSEARCH_ENDPOINT.'),
-  log: false
+  host: ENV['ENDPOINT'] || raise('Missing ENDPOINT.'),
+  log: true
 }, signer)
 
-info = client.info
-puts info['version']['distribution'] + ': ' + info['version']['number']
+# TODO: remove when OpenSearch Serverless adds / API
+case ENV['SERVICE'] || 'es'
+when 'es'
+  info = client.info
+  puts info['version']['distribution'] + ': ' + info['version']['number']
+end
 
 # create an index
 index = 'movies'
@@ -35,7 +39,7 @@ client.indices.create(index: index)
 begin
   # index data
   document = { title: 'Moneyball', director: 'Bennett Miller', year: 2011 }
-  client.index(index: index, body: document, id: '1', refresh: true)
+  client.index(index: index, body: document, id: '1')
 
   # wait for the document to index
   sleep(3)

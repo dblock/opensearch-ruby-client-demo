@@ -1,10 +1,10 @@
 # OpenSearch Ruby Client Demo
 
-Makes requests to Amazon OpenSearch using the OpenSearch Ruby Client, specifically [opensearch-aws-sigv4](https://rubygems.org/gems/opensearch-aws-sigv4) released as part of (https://github.com/opensearch-project/opensearch-ruby/issues/71).
+Makes requests to Amazon OpenSearch using the OpenSearch Ruby Client, specifically [opensearch-aws-sigv4](https://rubygems.org/gems/opensearch-aws-sigv4) released as part of (https://github.com/opensearch-project/opensearch-ruby/issues/71). Version 1.1.0 added support for OpenSearch Serverless.
 
 ## Running
 
-Create an OpenSearch domain in (AWS) which support IAM based AuthN/AuthZ.
+Create an OpenSearch domain or an OpenSearch Serverless collection in (AWS) which support IAM based AuthN/AuthZ.
 
 ```
 export AWS_ACCESS_KEY_ID=
@@ -12,7 +12,8 @@ export AWS_SECRET_ACCESS_KEY=
 export AWS_SESSION_TOKEN=
 export AWS_REGION=
 
-export OPENSEARCH_ENDPOINT=https://....us-west-2.es.amazonaws.com
+export SERVICE=es # use aoss for OpenSearch Serverless
+export ENDPOINT=https://....us-west-2.es.amazonaws.com
 
 bundle exec ruby example.rb
 ```

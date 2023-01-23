@@ -9,4 +9,4 @@
 
 source 'https://rubygems.org'
 
-gem 'opensearch-aws-sigv4', '~> 1.0.0'
+gem 'opensearch-aws-sigv4', '~> 1.1.0'
