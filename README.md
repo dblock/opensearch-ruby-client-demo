@@ -27,6 +27,8 @@ opensearch: 1.2.4
 
 The code will create an index, add a document, then cleanup.
 
+Use `bundle exec ruby json.rb` to run the [raw JSON sample](json.rb).
+
 ## License 
 
 This project is licensed under the [Apache v2.0 License](LICENSE.txt).
